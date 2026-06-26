@@ -1,22 +1,35 @@
 'use client'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 const NAV = [
-  { href: '/dashboard',         label: 'Tableau de bord', icon: '📊' },
-  { href: '/dashboard/upload',  label: 'Analyser un match', icon: '🎬' },
-  { href: '/dashboard/player',  label: 'Mon profil',       icon: '🏉' },
+  { href: '/dashboard',        label: 'Tableau de bord', icon: '📊' },
+  { href: '/dashboard/upload', label: 'Analyser un match', icon: '🎬' },
+  { href: '/dashboard/player', label: 'Mon profil',        icon: '🏉' },
 ]
 
 const NAV_CLUB = [
-  { href: '/dashboard/club',    label: 'Mon club',         icon: '🏛️' },
+  { href: '/dashboard/club',   label: 'Mon club',         icon: '🏛️' },
 ]
 
-export default function Sidebar({ user, profile }: { user: any; profile: any }) {
+export default function Sidebar({ user: userProp, profile: profileProp }: { user?: any; profile?: any } = {}) {
   const pathname = usePathname()
   const router   = useRouter()
   const supabase = createClient()
+  const [user, setUser]       = useState<any>(userProp ?? null)
+  const [profile, setProfile] = useState<any>(profileProp ?? null)
+
+  useEffect(() => {
+    if (userProp) return
+    supabase.auth.getUser().then(({ data: { user: u } }) => {
+      if (!u) { router.replace('/login'); return }
+      setUser(u)
+      supabase.from('profiles').select('*').eq('id', u.id).single()
+        .then(({ data }) => setProfile(data))
+    })
+  }, [])
 
   async function signOut() {
     await supabase.auth.signOut()
@@ -24,7 +37,7 @@ export default function Sidebar({ user, profile }: { user: any; profile: any }) 
     router.refresh()
   }
 
-  const initials = (profile?.full_name || user?.email || 'U')
+  const initials = ((profile?.full_name || user?.email || 'U') as string)
     .split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()
 
   const role = user?.user_metadata?.role
@@ -63,17 +76,19 @@ export default function Sidebar({ user, profile }: { user: any; profile: any }) 
 
       {/* User */}
       <div className="px-3 py-4 border-t border-white/5">
-        <div className="flex items-center gap-3 px-3 py-2 mb-1">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-xs font-bold text-black flex-shrink-0">
-            {initials}
+        {user && (
+          <div className="flex items-center gap-3 px-3 py-2 mb-1">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-xs font-bold text-black flex-shrink-0">
+              {initials}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-semibold text-white/80 truncate">
+                {profile?.full_name ?? user?.email}
+              </p>
+              <p className="text-[10px] text-white/30 capitalize">{profile?.plan || 'Gratuit'}</p>
+            </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-white/80 truncate">
-              {profile?.full_name ?? user?.email}
-            </p>
-            <p className="text-[10px] text-white/30 capitalize">{profile?.plan || 'Gratuit'}</p>
-          </div>
-        </div>
+        )}
         <button
           onClick={signOut}
           className="w-full text-left px-3 py-2 text-xs text-white/30 hover:text-red-400 hover:bg-red-500/8 rounded-lg transition-all"

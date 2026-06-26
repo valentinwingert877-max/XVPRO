@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 160" width="380" height="160">
+  <rect width="380" height="160" rx="16" fill="#0C0D11"/>
+  <rect width="380" height="3" fill="#D4A843"/>
+  <defs>
+    <clipPath id="cx"><rect x="45" y="25" width="90" height="110"/></clipPath>
+    <clipPath id="cv"><rect x="148" y="25" width="175" height="110"/></clipPath>
+  </defs>
+  <g clip-path="url(#cx)" stroke="white" stroke-width="14" stroke-linecap="butt" fill="none">
+    <line x1="5" y1="-25" x2="175" y2="170"/>
+    <line x1="175" y1="-25" x2="5" y2="170"/>
+  </g>
+  <g clip-path="url(#cv)" stroke="#D4A843" stroke-width="14" stroke-linecap="butt" stroke-linejoin="miter" fill="none">
+    <path d="M 148 25 L 206 135 L 264 25"/>
+    <path d="M 264 25 C 308 25 308 83 235 83"/>
+  </g>
+  <text x="190" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" letter-spacing="3.5" fill="#D4A84344">RUGBY INTELLIGENCE</text>
+</svg>

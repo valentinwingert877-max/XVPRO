@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 130" width="300" height="130">
+  <defs>
+    <clipPath id="cx"><rect x="5" y="5" width="90" height="120"/></clipPath>
+    <clipPath id="cv"><rect x="108" y="5" width="175" height="120"/></clipPath>
+  </defs>
+  <!-- X blanc -->
+  <g clip-path="url(#cx)" stroke="white" stroke-width="15" stroke-linecap="butt" fill="none">
+    <line x1="-40" y1="-55" x2="140" y2="185"/>
+    <line x1="140" y1="-55" x2="-40" y2="185"/>
+  </g>
+  <!-- VP or — V + bol P partagent la diagonale droite -->
+  <g clip-path="url(#cv)" stroke="#D4A843" stroke-width="15" stroke-linecap="butt" stroke-linejoin="miter" fill="none">
+    <path d="M 108 5 L 166 125 L 224 5"/>
+    <path d="M 224 5 C 268 5 268 65 195 65"/>
+  </g>
+</svg>

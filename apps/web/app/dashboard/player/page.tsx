@@ -77,7 +77,7 @@ export default function PlayerDashboard() {
   if (loading) return (
     <div className="flex min-h-screen items-center justify-center bg-[#07090f]">
       <div className="w-8 h-8 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-    </>
+    </div>
   )
 
   const allStats = profiles.flatMap((p: any) => p.player_stats ?? [])

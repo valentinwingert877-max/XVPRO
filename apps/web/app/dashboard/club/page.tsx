@@ -138,7 +138,7 @@ export default function ClubDashboard() {
         <div className="w-5 h-5 rounded-full border-2 border-white/20 border-t-amber-400 animate-spin" />
         Chargement du club...
       </div>
-    </>
+    </div>
   )
 
   if (!club) return (
@@ -151,7 +151,7 @@ export default function ClubDashboard() {
           Créer un club
         </Link>
       </div>
-    </>
+    </div>
   )
 
   const coaches = members.filter(m => m.role === 'coach')

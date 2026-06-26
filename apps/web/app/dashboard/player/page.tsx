@@ -12,7 +12,7 @@ function StatCard({ label, value, color = 'text-white' }: { label: string; value
     <div className="glass border border-white/7 rounded-2xl p-4 text-center">
       <p className={`text-3xl font-black ${color}`}>{value}</p>
       <p className="text-xs text-white/30 mt-1">{label}</p>
-    </>
+    </div>
   )
 }
 

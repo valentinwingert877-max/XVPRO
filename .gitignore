@@ -41,5 +41,8 @@ venv/
 *.onnx
 models/
 
+# Credentials
+ionos.txt
+
 # Misc
 *.log

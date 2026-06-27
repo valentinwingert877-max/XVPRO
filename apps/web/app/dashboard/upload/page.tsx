@@ -85,21 +85,9 @@ export default function UploadPage() {
       }
     }
 
-    setProgress(20); setStatusMsg("Lancement de l'analyse IA...")
-    try {
-      await fetch('https://xvpro-worker-production.up.railway.app/webhook', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'INSERT', table: 'matches',
-          record: { ...match, status: 'pending', external_url: mode === 'url' ? videoUrl.trim() : null },
-          old_record: {},
-        })
-      })
-    } catch (err) { console.warn('Worker:', err) }
-
-    setProgress(30); setStatusMsg('Analyse IA en cours...')
+    setProgress(30); setStatusMsg('Vidéo ajoutée à la bibliothèque !')
     setStage('done')
-    setTimeout(() => router.push(`/dashboard/match/${match.id}`), 2000)
+    setTimeout(() => router.push('/dashboard/library'), 1500)
   }
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -109,8 +97,8 @@ export default function UploadPage() {
     <div className="flex min-h-screen items-center justify-center bg-[#07090f]">
       <div className="text-center animate-fade-up">
         <div className="w-20 h-20 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center text-4xl mx-auto mb-5">✅</div>
-        <p className="text-xl font-bold text-white mb-2">Analyse lancee !</p>
-        <p className="text-white/40">Redirection vers votre analyse...</p>
+        <p className="text-xl font-bold text-white mb-2">Vidéo ajoutée !</p>
+        <p className="text-white/40">Redirection vers la bibliothèque...</p>
       </div>
     </div>
   )
@@ -276,8 +264,8 @@ export default function UploadPage() {
 
             {stage === 'form' && (
               <button type="submit" disabled={!canSubmit}
-                className="w-full py-4 bg-white text-gray-900 font-extrabold rounded-2xl text-sm hover:bg-gray-100 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/10">
-                Lancer l'analyse IA
+                className="w-full py-4 bg-amber-400 text-black font-extrabold rounded-2xl text-sm hover:bg-amber-300 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:-translate-y-0.5 hover:shadow-lg hover:shadow-amber-400/10">
+                Ajouter à la bibliothèque →
               </button>
             )}
           </form>

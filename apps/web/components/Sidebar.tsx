@@ -5,9 +5,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 const NAV = [
-  { href: '/dashboard',        label: 'Tableau de bord', icon: '📊' },
-  { href: '/dashboard/upload', label: 'Analyser un match', icon: '🎬' },
-  { href: '/dashboard/player', label: 'Mon profil',        icon: '🏉' },
+  { href: '/dashboard',         label: 'Tableau de bord', icon: '📊' },
+  { href: '/dashboard/library', label: 'Bibliothèque',    icon: '🎬' },
+  { href: '/dashboard/upload',  label: 'Ajouter vidéo',   icon: '⬆️' },
+  { href: '/dashboard/player',  label: 'Mon profil',      icon: '🏉' },
 ]
 
 const NAV_CLUB = [
